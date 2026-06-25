@@ -37,14 +37,14 @@ sqlite-android = "com.github.requery:sqlite-android:3.43.0"
 
 preferencektx = "androidx.preference:preference-ktx:1.2.1"
 
-injekt-core = "com.github.fuljiz43-ctrl:injekt:65b0440"
+injekt-core = "uy.kohesive:injekt-core:1.16.1"
 
 coil-bom = { module = "io.coil-kt:coil-bom", version = "2.5.0" }
 coil-core = { module = "io.coil-kt:coil" }
 coil-gif = { module = "io.coil-kt:coil-gif" }
 coil-compose = { module = "io.coil-kt:coil-compose" }
 
-subsamplingscaleimageview = "com.github.fuljiz43-ctrl:subsampling-scale-image-view:7e57335"
+subsamplingscaleimageview = "com.github.fuljiz43-ctrl:subsampling-scale-image-view:66e0db195d"
 image-decoder = "com.github.fuljiz43-ctrl:image-decoder:f11fbd3a29"
 
 natural-comparator = "com.github.gpanther:java-nat-sort:natural-comparator-1.1"
@@ -55,7 +55,7 @@ richtext-m3 = { module = "com.halilibo.compose-richtext:richtext-ui-material3", 
 material = "com.google.android.material:material:1.11.0"
 flexible-adapter-core = "com.github.arkon.FlexibleAdapter:flexible-adapter:c8013533"
 photoview = "com.github.chrisbanes:PhotoView:2.3.0"
-directionalviewpager = "com.github.fuljiz43-ctrl:DirectionalViewPager:1.0.0"
+directionalviewpager = "com.github.fuljiz43-ctrl:DirectionalViewPager:7168aff0a0"
 insetter = "dev.chrisbanes.insetter:insetter:0.6.1"
 compose-materialmotion = "io.github.fornewid:material-motion-compose-core:1.1.0"
 
