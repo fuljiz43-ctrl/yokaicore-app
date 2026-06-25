@@ -24,8 +24,8 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import com.hippo.unifile.UniFile
 import logcat.LogPriority
-import yokaicore.decoder.Format
-import yokaicore.decoder.ImageDecoder
+import tachiyomi.decoder.Format
+import tachiyomi.decoder.ImageDecoder
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -92,7 +92,7 @@ object ImageUtil {
         return false
     }
 
-    private fun getImageType(stream: InputStream): yokaicore.decoder.ImageType? {
+    private fun getImageType(stream: InputStream): tachiyomi.decoder.ImageType? {
         val bytes = ByteArray(32)
 
         val length = if (stream.markSupported()) {
