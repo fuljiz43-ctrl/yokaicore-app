@@ -11,7 +11,7 @@ import coil.fetch.SourceResult
 import coil.request.Options
 import okio.BufferedSource
 import yokaicore.core.util.system.ImageUtil
-import yokaicore.decoder.ImageDecoder
+import tachiyomi.decoder.ImageDecoder
 
 /**
  * A [Decoder] that uses built-in [ImageDecoder] to decode images that is not supported by the system.
