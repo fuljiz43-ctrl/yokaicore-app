@@ -32,8 +32,17 @@ jobs:
           java-version: 17
           distribution: adopt
 
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 -d > ${{ github.workspace }}/app/yokaicore.jks
+
       - name: Build app and run unit tests
         uses: gradle/gradle-command-action@v2
+        env:
+          SIGNING_STORE_PATH: ${{ github.workspace }}/app/yokaicore.jks
+          ALIAS: ${{ secrets.ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         with:
           arguments: assembleStandardRelease
 
