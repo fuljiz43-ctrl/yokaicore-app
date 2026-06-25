@@ -17,7 +17,7 @@ android {
             create("Database") {
                 packageName.set("yokaicore.data")
                 dialect(libs.sqldelight.dialects.sql)
-                schemaOutputDirectory.set(project.file("./src/main/sqldelight"))
+                schemaOutputDirectory.set(project.file("./src/main/sqldelight/yokaicore"))
             }
         }
     }
