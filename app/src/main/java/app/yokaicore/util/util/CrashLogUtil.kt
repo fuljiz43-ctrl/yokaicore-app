@@ -1,0 +1,75 @@
+package app.yokaicore.util
+
+import android.content.Context
+import android.os.Build
+import app.yokaicore.BuildConfig
+import app.yokaicore.extension.ExtensionManager
+import app.yokaicore.util.storage.getUriCompat
+import app.yokaicore.util.system.WebViewUtil
+import app.yokaicore.util.system.createFileInCacheDir
+import app.yokaicore.util.system.toShareIntent
+import app.yokaicore.util.system.toast
+import yokaicore.core.util.lang.withNonCancellableContext
+import yokaicore.core.util.lang.withUIContext
+import uy.kohesive.injekt.Injekt
+import uy.kohesive.injekt.api.get
+
+class CrashLogUtil(
+    private val context: Context,
+    private val extensionManager: ExtensionManager = Injekt.get(),
+) {
+
+    suspend fun dumpLogs() = withNonCancellableContext {
+        try {
+            val file = context.createFileInCacheDir("yokaicore_crash_logs.txt")
+
+            file.appendText(getDebugInfo() + "\n\n")
+            getExtensionsInfo()?.let { file.appendText("$it\n\n") }
+
+            Runtime.getRuntime().exec("logcat *:E -d -f ${file.absolutePath}").waitFor()
+
+            val uri = file.getUriCompat(context)
+            context.startActivity(uri.toShareIntent(context, "text/plain"))
+        } catch (e: Throwable) {
+            withUIContext { context.toast("Failed to get logs") }
+        }
+    }
+
+    fun getDebugInfo(): String {
+        return """
+            App version: ${BuildConfig.VERSION_NAME} (${BuildConfig.FLAVOR}, ${BuildConfig.COMMIT_SHA}, ${BuildConfig.VERSION_CODE}, ${BuildConfig.BUILD_TIME})
+            Android version: ${Build.VERSION.RELEASE} (SDK ${Build.VERSION.SDK_INT}; build ${Build.DISPLAY})
+            Device brand: ${Build.BRAND}
+            Device manufacturer: ${Build.MANUFACTURER}
+            Device name: ${Build.DEVICE} (${Build.PRODUCT})
+            Device model: ${Build.MODEL}
+            WebView: ${WebViewUtil.getVersion(context)}
+        """.trimIndent()
+    }
+
+    private fun getExtensionsInfo(): String? {
+        val availableExtensions = extensionManager.availableExtensionsFlow.value.associateBy { it.pkgName }
+
+        val extensionInfoList = extensionManager.installedExtensionsFlow.value
+            .sortedBy { it.name }
+            .mapNotNull {
+                val availableExtension = availableExtensions[it.pkgName]
+                val hasUpdate = (availableExtension?.versionCode ?: 0) > it.versionCode
+
+                if (!hasUpdate && !it.isObsolete) return@mapNotNull null
+
+                """
+                    - ${it.name}
+                      Installed: ${it.versionName} / Available: ${availableExtension?.versionName ?: "?"}
+                      Obsolete: ${it.isObsolete}
+                """.trimIndent()
+            }
+
+        return if (extensionInfoList.isNotEmpty()) {
+            (listOf("Problematic extensions:") + extensionInfoList)
+                .joinToString("\n")
+        } else {
+            null
+        }
+    }
+}
