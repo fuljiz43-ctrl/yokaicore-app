@@ -11,6 +11,7 @@ kotlin {
             dependencies {
                 api(kotlinx.serialization.json)
                 api(libs.injekt.core)
+                api(libs.injekt.api)
                 api(libs.rxjava)
                 api(libs.jsoup)
             }
