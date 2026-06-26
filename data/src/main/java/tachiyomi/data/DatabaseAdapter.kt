@@ -23,7 +23,7 @@ object StringListColumnAdapter : ColumnAdapter<List<String>, String> {
 
 object UpdateStrategyColumnAdapter : ColumnAdapter<UpdateStrategy, Long> {
     override fun decode(databaseValue: Long): UpdateStrategy =
-        UpdateStrategy.entries.getOrElse(databaseValue.toInt()) { UpdateStrategy.ALWAYS_UPDATE }
+        UpdateStrategy.values().getOrElse(databaseValue.toInt()) { UpdateStrategy.ALWAYS_UPDATE }
 
     override fun encode(value: UpdateStrategy): Long = value.ordinal.toLong()
 }

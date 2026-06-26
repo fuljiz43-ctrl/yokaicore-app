@@ -33,7 +33,7 @@ object SettingsReaderScreen : SearchableSettings {
             Preference.PreferenceItem.ListPreference(
                 pref = readerPref.defaultReadingMode(),
                 title = stringResource(MR.strings.pref_viewer_type),
-                entries = ReadingMode.entries.drop(1)
+                entries = ReadingMode.values().drop(1)
                     .associate { it.flagValue to stringResource(it.stringRes) }
                     .toImmutableMap(),
             ),
@@ -90,7 +90,7 @@ object SettingsReaderScreen : SearchableSettings {
                 Preference.PreferenceItem.ListPreference(
                     pref = readerPreferences.defaultOrientationType(),
                     title = stringResource(MR.strings.pref_rotation_type),
-                    entries = ReaderOrientation.entries.drop(1)
+                    entries = ReaderOrientation.values().drop(1)
                         .associate { it.flagValue to stringResource(it.stringRes) }
                         .toImmutableMap(),
                 ),

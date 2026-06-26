@@ -30,7 +30,7 @@ internal fun ColumnScope.ReadingModePage(screenModel: ReaderSettingsScreenModel)
 
     val readingMode = remember(manga) { ReadingMode.fromPreference(manga?.readingMode?.toInt()) }
     SettingsChipRow(MR.strings.pref_category_reading_mode) {
-        ReadingMode.entries.map {
+        ReadingMode.values().map {
             FilterChip(
                 selected = it == readingMode,
                 onClick = { screenModel.onChangeReadingMode(it) },
@@ -41,7 +41,7 @@ internal fun ColumnScope.ReadingModePage(screenModel: ReaderSettingsScreenModel)
 
     val orientation = remember(manga) { ReaderOrientation.fromPreference(manga?.readerOrientation?.toInt()) }
     SettingsChipRow(MR.strings.rotation_type) {
-        ReaderOrientation.entries.map {
+        ReaderOrientation.values().map {
             FilterChip(
                 selected = it == orientation,
                 onClick = { screenModel.onChangeOrientation(it) },
@@ -218,7 +218,7 @@ private fun ColumnScope.TapZonesItems(
 
     if (selected != 5) {
         SettingsChipRow(MR.strings.pref_read_with_tapping_inverted) {
-            ReaderPreferences.TappingInvertMode.entries.map {
+            ReaderPreferences.TappingInvertMode.values().map {
                 FilterChip(
                     selected = it == invertMode,
                     onClick = { onSelectInvertMode(it) },
