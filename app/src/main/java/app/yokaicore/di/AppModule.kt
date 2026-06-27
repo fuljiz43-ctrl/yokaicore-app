@@ -77,7 +77,7 @@ class AppModule(val app: Application) : InjektModule {
                 },
             )
         }
-        addSingletonFactory {
+        addSingletonFactory<Database> {
             Database(
                 driver = get(),
                 historyAdapter = History.Adapter(
@@ -91,13 +91,13 @@ class AppModule(val app: Application) : InjektModule {
         }
         addSingletonFactory<DatabaseHandler> { AndroidDatabaseHandler(get(), get()) }
 
-        addSingletonFactory {
+        addSingletonFactory<Json> {
             Json {
                 ignoreUnknownKeys = true
                 explicitNulls = false
             }
         }
-        addSingletonFactory {
+        addSingletonFactory<XML> {
             XML {
                 defaultPolicy {
                     ignoreUnknownChildren()
@@ -112,30 +112,30 @@ class AppModule(val app: Application) : InjektModule {
             ProtoBuf
         }
 
-        addSingletonFactory { UniFileTempFileManager(app) }
+        addSingletonFactory<UniFileTempFileManager> { UniFileTempFileManager(app) }
 
-        addSingletonFactory { ChapterCache(app, get()) }
-        addSingletonFactory { CoverCache(app) }
+        addSingletonFactory<ChapterCache> { ChapterCache(app, get()) }
+        addSingletonFactory<CoverCache> { CoverCache(app) }
 
-        addSingletonFactory { NetworkHelper(app, get()) }
-        addSingletonFactory { JavaScriptEngine(app) }
+        addSingletonFactory<NetworkHelper> { NetworkHelper(app, get()) }
+        addSingletonFactory<JavaScriptEngine> { JavaScriptEngine(app) }
 
         addSingletonFactory<SourceManager> { AndroidSourceManager(app, get(), get()) }
-        addSingletonFactory { ExtensionManager(app) }
+        addSingletonFactory<ExtensionManager> { ExtensionManager(app) }
 
-        addSingletonFactory { DownloadProvider(app) }
-        addSingletonFactory { DownloadManager(app) }
-        addSingletonFactory { DownloadCache(app) }
+        addSingletonFactory<DownloadProvider> { DownloadProvider(app) }
+        addSingletonFactory<DownloadManager> { DownloadManager(app) }
+        addSingletonFactory<DownloadCache> { DownloadCache(app) }
 
-        addSingletonFactory { TrackerManager() }
-        addSingletonFactory { DelayedTrackingStore(app) }
+        addSingletonFactory<TrackerManager> { TrackerManager() }
+        addSingletonFactory<DelayedTrackingStore> { DelayedTrackingStore(app) }
 
-        addSingletonFactory { ImageSaver(app) }
+        addSingletonFactory<ImageSaver> { ImageSaver(app) }
 
-        addSingletonFactory { AndroidStorageFolderProvider(app) }
-        addSingletonFactory { LocalSourceFileSystem(get()) }
-        addSingletonFactory { LocalCoverManager(app, get()) }
-        addSingletonFactory { StorageManager(app, get()) }
+        addSingletonFactory<AndroidStorageFolderProvider> { AndroidStorageFolderProvider(app) }
+        addSingletonFactory<LocalSourceFileSystem> { LocalSourceFileSystem(get()) }
+        addSingletonFactory<LocalCoverManager> { LocalCoverManager(app, get()) }
+        addSingletonFactory<StorageManager> { StorageManager(app, get()) }
 
         // Asynchronously init expensive components for a faster cold start
         ContextCompat.getMainExecutor(app).execute {
