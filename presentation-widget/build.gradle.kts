@@ -35,4 +35,5 @@ dependencies {
     implementation(libs.coil.core)
 
     api(libs.injekt.core)
+    api(libs.injekt.api)
 }
