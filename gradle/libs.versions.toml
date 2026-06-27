@@ -37,8 +37,8 @@ sqlite-android = "com.github.requery:sqlite-android:3.43.0"
 
 preferencektx = "androidx.preference:preference-ktx:1.2.1"
 
-injekt-core = "com.github.fuljiz43-ctrl.injekt:injekt-core:2b4d070305"
-injekt-api = "com.github.fuljiz43-ctrl.injekt:injekt-api:2b4d070305"
+injekt-core = "com.github.fuljiz43-ctrl.injekt:injekt-core:d78f567bc5"
+injekt-api = "com.github.fuljiz43-ctrl.injekt:injekt-api:d78f567bc5"
 
 coil-bom = { module = "io.coil-kt:coil-bom", version = "2.5.0" }
 coil-core = { module = "io.coil-kt:coil" }
