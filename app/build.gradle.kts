@@ -224,6 +224,7 @@ dependencies {
 
     // Dependency injection
     implementation(libs.injekt.core)
+    implementation(libs.injekt.api)
 
     // Image loading
     implementation(platform(libs.coil.bom))
