@@ -27,43 +27,43 @@ class PreferenceModule(val app: Application) : InjektModule {
         addSingletonFactory<PreferenceStore> {
             AndroidPreferenceStore(app)
         }
-        addSingletonFactory {
+        addSingletonFactory<NetworkPreferences> {
             NetworkPreferences(
                 preferenceStore = get(),
                 verboseLogging = isDevFlavor,
             )
         }
-        addSingletonFactory {
+        addSingletonFactory<SourcePreferences> {
             SourcePreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<SecurityPreferences> {
             SecurityPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<LibraryPreferences> {
             LibraryPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<ReaderPreferences> {
             ReaderPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<TrackPreferences> {
             TrackPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<DownloadPreferences> {
             DownloadPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<BackupPreferences> {
             BackupPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<StoragePreferences> {
             StoragePreferences(
                 folderProvider = get<AndroidStorageFolderProvider>(),
                 preferenceStore = get(),
             )
         }
-        addSingletonFactory {
+        addSingletonFactory<UiPreferences> {
             UiPreferences(get())
         }
-        addSingletonFactory {
+        addSingletonFactory<BasePreferences> {
             BasePreferences(app, get())
         }
     }
